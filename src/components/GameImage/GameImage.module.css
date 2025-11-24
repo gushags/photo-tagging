@@ -1,0 +1,17 @@
+/* GameImage.module.css */
+
+.gamePhoto {
+  position: relative;
+  background-image: url('src/assets/library.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100vw;
+  min-height: 900px;
+}
+
+.circleWrapper {
+  position: absolute;
+  transform: translate(-50%, -50%); /* center on click */
+  pointer-events: none; /* so clicks pass through */
+}
