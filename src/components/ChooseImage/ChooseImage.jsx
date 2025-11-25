@@ -1,14 +1,27 @@
 // ChooseImage.jsx
 
 import style from './ChooseImage.module.css';
+import { getPopupPosition } from '../../utils/util';
 
 function ChooseImage({
+  dimension,
   currentCircle,
   setSelection,
   coordinates,
   setTargetCircles,
   targetCircles,
 }) {
+  const popupWidth = 250;
+  const popupHeight = 200;
+
+  const { left: xPos, top: yPos } = getPopupPosition(
+    coordinates.x,
+    coordinates.y,
+    popupWidth,
+    popupHeight,
+    dimension
+  );
+
   const clearCircle = () => {
     const updatedCircles = targetCircles.filter(
       (circle) => circle.id !== currentCircle.id
@@ -20,13 +33,14 @@ function ChooseImage({
   const handleSuccess = () => {
     setSelection(false); // Close window
   };
+
   return (
     <>
       <div
         className={style.choicesBox}
         style={{
-          top: coordinates.y,
-          left: coordinates.x,
+          left: xPos,
+          top: yPos,
         }}
         onClick={(e) => e.stopPropagation()}
       >

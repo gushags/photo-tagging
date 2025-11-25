@@ -7,16 +7,17 @@ import style from './GameImage.module.css';
 function GameImage() {
   const [selection, setSelection] = useState(false);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+  const [dimension, setDimension] = useState();
   const [currentCircle, setCurrentCircle] = useState();
   const [targetCircles, setTargetCircles] = useState([]);
 
   const registerPosition = (event) => {
     const e = event.currentTarget;
-    const dimension = e.getBoundingClientRect();
-    console.log('Dimension: ', dimension);
-    const x = event.clientX - dimension.left;
-    const y = event.clientY - dimension.top;
-    return [x, y, dimension];
+    const dim = e.getBoundingClientRect();
+    setDimension(dim);
+    const x = event.clientX - dim.left;
+    const y = event.clientY - dim.top;
+    return [x, y];
   };
 
   const addTarget = (event) => {
@@ -33,11 +34,10 @@ function GameImage() {
     };
     setCurrentCircle(newCircle);
     setTargetCircles([...targetCircles, newCircle]);
-    showChoicesBox(newCircle, dimension);
+    showChoicesBox(newCircle);
   };
 
-  const showChoicesBox = (newCircle, dimension) => {
-    console.log('Dimension:', dimension);
+  const showChoicesBox = (newCircle) => {
     console.log(newCircle);
     setCoordinates({ x: newCircle.x, y: newCircle.y });
     setSelection(true);
@@ -68,6 +68,7 @@ function GameImage() {
         {selection && (
           <ChooseImage
             currentCircle={currentCircle}
+            dimension={dimension}
             setSelection={setSelection}
             coordinates={coordinates}
             targetCircles={targetCircles}
