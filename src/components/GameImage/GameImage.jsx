@@ -22,12 +22,13 @@ function GameImage() {
 
   const addTarget = (event) => {
     // get click coordinates
-    let [x, y, dimension] = registerPosition(event);
+    if (selection) return;
+    let [x, y] = registerPosition(event);
+
     console.log({ x: x, y: y });
 
     // make new svg circle element
     const newCircle = {
-      // id: crypto.randomUUID(),
       id: targetCircles.length + 1,
       x,
       y,
@@ -38,6 +39,7 @@ function GameImage() {
   };
 
   const showChoicesBox = (newCircle) => {
+    if (selection) return; // ignore clicks on background if already selected
     console.log(newCircle);
     setCoordinates({ x: newCircle.x, y: newCircle.y });
     setSelection(true);
