@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import ChooseImage from '../ChooseImage/ChooseImage';
 import style from './GameImage.module.css';
 
-function GameImage() {
+function GameImage({ grayStates, setGrayStates }) {
   const [selection, setSelection] = useState(false);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const containerRef = useRef();
@@ -62,7 +62,11 @@ function GameImage() {
   return (
     <>
       <section className={style.imageWrapper}>
-        <img src='src/assets/library.jpg' alt='' />
+        <img
+          className={style.imageWrapperImg}
+          src='src/assets/library.jpg'
+          alt=''
+        />
 
         <div className={style.gamePhoto} ref={containerRef} onClick={addTarget}>
           {targetCircles.map((circle) => (
@@ -96,6 +100,8 @@ function GameImage() {
               coordinates={coordinates}
               targetCircles={targetCircles}
               setTargetCircles={setTargetCircles}
+              grayStates={grayStates}
+              setGrayStates={setGrayStates}
             />
           )}
         </div>

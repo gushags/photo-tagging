@@ -2,9 +2,21 @@
 
 .choicesBox {
   position: absolute;
-  width: 200px;
-  height: 250px;
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  height: 360px;
   border: 2px solid green;
   border-radius: 15px;
   background-color: white;
+}
+
+.choicesBox img {
+  height: 50px;
+  padding-right: 10px;
+}
+
+.items {
+  display: flex;
+  margin: 7px 10px 0;
 }

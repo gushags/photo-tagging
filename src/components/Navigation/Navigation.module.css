@@ -3,3 +3,23 @@
 nav {
   height: 100px;
 }
+
+.grayscale {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.noGrayscale {
+  filter: grayscale(0%);
+}
+
+.iconContainer {
+  display: flex;
+}
+
+.iconContainer img {
+  height: 60px;
+  margin: 5px 5px;
+  border: 2px solid black;
+  border-radius: 50%;
+}
