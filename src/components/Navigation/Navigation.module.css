@@ -13,11 +13,13 @@ nav {
   filter: grayscale(0%);
 }
 
-.iconContainer {
+.container {
   display: flex;
+  justify-content: space-between;
+  margin: 0 50px;
 }
 
-.iconContainer img {
+.container img {
   height: 60px;
   margin: 5px 5px;
   border: 2px solid black;

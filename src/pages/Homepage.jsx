@@ -13,10 +13,15 @@ function Homepage() {
     poe: true,
     man: true,
   });
+  const [timer, setTimer] = useState(0);
   return (
     <>
-      <Navigation grayStates={grayStates} />
-      <GameImage grayStates={grayStates} setGrayStates={setGrayStates} />
+      <Navigation grayStates={grayStates} timer={timer} setTimer={setTimer} />
+      <GameImage
+        grayStates={grayStates}
+        setGrayStates={setGrayStates}
+        setTimer={setTimer}
+      />
     </>
   );
 }
