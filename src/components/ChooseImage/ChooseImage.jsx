@@ -1,7 +1,8 @@
 // ChooseImage.jsx
 
 import style from './ChooseImage.module.css';
-import { getPopupPosition } from '../../utils/util';
+import { manObject } from '../../../api/data';
+import { getPopupPosition, checkCoordinatesForPic } from '../../utils/util';
 
 function ChooseImage({
   dimension,
@@ -34,6 +35,16 @@ function ChooseImage({
     setSelection(false); // Close window
   };
 
+  const checkTargetPosition = (circleX, circleY, objX, objY) => {
+    // do something
+    if (checkCoordinatesForPic(circleX, circleY, objX, objY, dimension)) {
+      console.log('success');
+      handleSuccess();
+    } else {
+      clearCircle();
+    }
+  };
+
   return (
     <>
       <div
@@ -45,6 +56,18 @@ function ChooseImage({
         onClick={(e) => e.stopPropagation()}
       >
         This is the pop-up box.
+        <div
+          onClick={() =>
+            checkTargetPosition(
+              coordinates.x,
+              coordinates.y,
+              manObject.x,
+              manObject.y
+            )
+          }
+        >
+          Check if this is the picture
+        </div>
         <div>X: {coordinates.x}</div>
         <div>Y: {coordinates.y}</div>
         <button onClick={clearCircle}>Cancel</button>

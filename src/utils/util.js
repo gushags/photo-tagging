@@ -38,10 +38,13 @@ export function getPopupPosition(
   return { left, top };
 }
 
-export function checkCoordinatesForPic(cx, cy, x, y) {
-  //  distanceSquared = (x - cx) ^ (2 + (y - cy)) ^ 2;
-  // If distanceSquared < r * r, the pixel is inside the circle.
-  // If distanceSquared == r * r, the pixel is on the circumference of the circle.
-  // If distanceSquared > r * r, the pixel is outside the circle.
-  // return true or false
+export function checkCoordinatesForPic(cx, cy, objX, objY, dimension, r = 25) {
+  const distanceSquared =
+    (cx * dimension.width - objX * dimension.width) ** 2 +
+    (cy * dimension.height - objY * dimension.height) ** 2;
+  if (distanceSquared <= r * r) {
+    return true;
+  } else {
+    return false;
+  }
 }
