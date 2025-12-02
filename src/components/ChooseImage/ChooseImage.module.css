@@ -9,14 +9,90 @@
   border: 2px solid green;
   border-radius: 15px;
   background-color: white;
+  transition: opacity 600ms ease-out;
+}
+
+.fadeout {
+  opacity: 0;
 }
 
 .choicesBox img {
   height: 50px;
+  border-radius: 50%;
   padding-right: 10px;
 }
 
-.items {
+.items,
+.itemsFail {
   display: flex;
-  margin: 7px 10px 0;
+  padding: 7px 10px 0;
+}
+
+.choicesBox div:first-of-type:hover {
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+}
+
+.failBox {
+  border-color: red;
+}
+
+.items:hover {
+  cursor: pointer;
+  background-color: #00800020;
+}
+
+.itemsFail:hover {
+  cursor: pointer;
+  background-color: #ff000040;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Apply to the whole box */
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes popOut {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scale(1.2); /* bulge up */
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(0.95); /* bulge back slightly smaller */
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 0; /* fade out */
+  }
+}
+
+.successBox {
+  animation: popOut 0.9s ease-in-out forwards;
+  /* 'forwards' ensures it stays at opacity 0 at the end */
 }

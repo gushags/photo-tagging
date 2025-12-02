@@ -1,5 +1,7 @@
 /* Navigation.module.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+
 nav {
   height: 100px;
 }
@@ -22,6 +24,14 @@ nav {
 .container img {
   height: 60px;
   margin: 5px 5px;
-  border: 2px solid black;
+  outline: solid 3px green;
+  /* gets rid of white between outline and image */
+  outline-offset: -0.1ch;
   border-radius: 50%;
+}
+
+.novafont {
+  font-family: 'Nova Mono', monospace;
+  font-weight: 400;
+  font-style: normal;
 }

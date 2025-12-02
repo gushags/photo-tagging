@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import ChooseImage from '../ChooseImage/ChooseImage';
 import style from './GameImage.module.css';
 
-function GameImage({ grayStates, setGrayStates }) {
+function GameImage({ grayStates, setGrayStates, setStopTimer }) {
   const [selection, setSelection] = useState(false);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const containerRef = useRef();
@@ -102,49 +102,11 @@ function GameImage({ grayStates, setGrayStates }) {
               setTargetCircles={setTargetCircles}
               grayStates={grayStates}
               setGrayStates={setGrayStates}
+              setStopTimer={setStopTimer}
             />
           )}
         </div>
       </section>
-      {/* <section
-        ref={containerRef}
-        className={style.gamePhoto}
-        onClick={addTarget}
-      >
-        {targetCircles.map((circle) => (
-          <div
-            key={circle.id}
-            className={style.circleWrapper}
-            // adjust circle if window changes
-            style={{
-              left: circle.x * dimension.width,
-              top: circle.y * dimension.height,
-            }}
-          >
-            <svg height='100' width='100'>
-              <circle
-                cx='50'
-                cy='50'
-                r='25'
-                stroke='green'
-                strokeWidth='3'
-                fill='white'
-                fillOpacity='0.4'
-              />
-            </svg>
-          </div>
-        ))}
-        {selection && (
-          <ChooseImage
-            currentCircle={currentCircle}
-            dimension={dimension}
-            setSelection={setSelection}
-            coordinates={coordinates}
-            targetCircles={targetCircles}
-            setTargetCircles={setTargetCircles}
-          />
-        )}
-      </section> */}
     </>
   );
 }

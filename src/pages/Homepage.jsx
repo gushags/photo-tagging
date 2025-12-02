@@ -2,6 +2,8 @@
 
 import GameImage from '../components/GameImage/GameImage';
 import Navigation from '../components/Navigation/Navigation';
+import Leaderboard from '../components/LeaderBoard/LeaderBoard';
+
 import { useState } from 'react';
 
 function Homepage() {
@@ -14,14 +16,23 @@ function Homepage() {
     man: true,
   });
   const [timer, setTimer] = useState(0);
+  const [stopTimer, setStopTimer] = useState(false);
   return (
     <>
-      <Navigation grayStates={grayStates} timer={timer} setTimer={setTimer} />
+      <Navigation
+        grayStates={grayStates}
+        timer={timer}
+        setTimer={setTimer}
+        stopTimer={stopTimer}
+      />
       <GameImage
         grayStates={grayStates}
         setGrayStates={setGrayStates}
         setTimer={setTimer}
+        stopTimer={stopTimer}
+        setStopTimer={setStopTimer}
       />
+      {stopTimer && <Leaderboard />}
     </>
   );
 }

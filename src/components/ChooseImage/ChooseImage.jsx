@@ -1,6 +1,7 @@
 // ChooseImage.jsx
 
 import style from './ChooseImage.module.css';
+import { useState, useRef, useEffect } from 'react';
 import {
   manObject,
   bullObj,
@@ -18,7 +19,15 @@ function ChooseImage({
   setTargetCircles,
   targetCircles,
   setGrayStates,
+  setStopTimer,
 }) {
+  const [failColor, setFailColor] = useState(false);
+  const [closePopup, setClosePopup] = useState(false);
+  const [shake, setShake] = useState(false);
+  const [successAnimation, setSuccessAnimation] = useState(false);
+
+  const timeoutRef = useRef(null);
+
   const popupWidth = 290;
   const popupHeight = 400;
 
@@ -30,37 +39,96 @@ function ChooseImage({
     dimension
   );
 
+  useEffect(() => {
+    return () => {
+      // cleanup any pending timers on unmount
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleCancel = () => {
+    clearCircle();
+    setSelection(false);
+  };
+
   const clearCircle = () => {
     const updatedCircles = targetCircles.filter(
       (circle) => circle.id !== currentCircle.id
     );
     setTargetCircles(updatedCircles);
-    setSelection(false); // Close window
   };
 
   const handleSuccess = (id) => {
-    // Eliminates grayscale on success
-    setGrayStates((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-    setSelection(false); // Close window
+    // update grayscale state
+    setGrayStates((prevState) => {
+      const updated = {
+        ...prevState,
+        [id]: !prevState[id],
+      };
+
+      const hasTrue = Object.values(updated).some((value) => value === true);
+      if (!hasTrue) setStopTimer(true);
+
+      return updated;
+    });
+
+    // trigger success animation
+    setSuccessAnimation(true);
+
+    // delay the actual removal until the animation finishes
+    setTimeout(() => {
+      setClosePopup(true); // optional if you still want to fade opacity
+      setSelection(false); // close popup
+      setSuccessAnimation(false); // reset for next time
+    }, 500); // match this to the CSS transition duration
+  };
+
+  const startFailCloseSequence = () => {
+    setFailColor(true);
+    clearCircle();
+    setShake(true); // <-- start shaking
+
+    // stop shaking after animation duration
+    setTimeout(() => setShake(false), 400);
+
+    // small delay so user sees the red flash, then start fade
+    timeoutRef.current = setTimeout(() => {
+      setClosePopup(true); // adds the fadeout class (opacity -> 0)
+
+      // wait for the fade transition to finish, then remove the circle and reset
+      // MATCH this duration to the CSS transition length (see .choicesBox transition)
+      timeoutRef.current = setTimeout(() => {
+        clearCircle();
+        setFailColor(false);
+        // setFailedId(null);
+        setClosePopup(false); // reset in case component reused
+        setSelection(false);
+      }, 600); // fade duration in ms (should match CSS)
+    }, 500); // time to display red before fading
   };
 
   const checkTargetPosition = (circleX, circleY, objX, objY, objID) => {
-    // do something
     if (checkCoordinatesForPic(circleX, circleY, objX, objY, dimension)) {
       console.log('success');
+
       handleSuccess(objID);
     } else {
-      clearCircle();
+      // change hover color if false
+      // add slow transition
+      startFailCloseSequence();
     }
   };
 
   return (
     <>
       <div
-        className={style.choicesBox}
+        className={`${style.choicesBox} ${closePopup ? style.fadeout : ''} ${
+          failColor ? style.failBox : ''
+        } ${shake ? style.shake : ''} ${
+          successAnimation ? style.successBox : ''
+        }`}
         style={{
           left: xPos,
           top: yPos,
@@ -68,7 +136,7 @@ function ChooseImage({
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className={style.items}
+          className={!failColor ? style.items : style.itemsFail}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -79,11 +147,11 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/purple-man.jpg' alt='purple-man' />
+          <img src='src/assets/waldos/purple-man.png' alt='purple-man' />
           <p>Purple Paulie</p>
         </div>
         <div
-          className={style.items}
+          className={!failColor ? style.items : style.itemsFail}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -94,11 +162,11 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/bull.jpg' alt='bull' />
+          <img src='src/assets/waldos/bull.png' alt='bull' />
           <p>Bull Squishy</p>
         </div>
         <div
-          className={style.items}
+          className={!failColor ? style.items : style.itemsFail}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -109,11 +177,11 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/duck.jpg' alt='duck' />
+          <img src='src/assets/waldos/duck.png' alt='duck' />
           <p>Danny Duck</p>
         </div>
         <div
-          className={style.items}
+          className={!failColor ? style.items : style.itemsFail}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -124,11 +192,11 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/gnome.jpg' alt='Edgar' />
+          <img src='src/assets/waldos/gnome.png' alt='Edgar' />
           <p>Gnomeo</p>
         </div>
         <div
-          className={style.items}
+          className={!failColor ? style.items : style.itemsFail}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -139,10 +207,10 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/poe.jpg' alt='gnome' />
+          <img src='src/assets/waldos/poe.png' alt='gnome' />
           <p>Edgar Allen Poe</p>
         </div>
-        <button onClick={clearCircle}>Cancel</button>
+        <button onClick={handleCancel}>Cancel</button>
       </div>
     </>
   );
