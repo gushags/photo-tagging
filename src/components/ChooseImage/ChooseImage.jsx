@@ -19,6 +19,7 @@ function ChooseImage({
   setTargetCircles,
   targetCircles,
   setGrayStates,
+  grayStates,
   setStopTimer,
 }) {
   const [failColor, setFailColor] = useState(false);
@@ -137,7 +138,9 @@ function ChooseImage({
         onClick={(e) => e.stopPropagation()}
       >
         <div
-          className={!failColor ? style.items : style.itemsFail}
+          className={`{${!failColor ? style.items : style.itemsFail} ${
+            !grayStates.man ? style.disableItem : style.items
+          }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -148,11 +151,17 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/purple-man.png' alt='purple-man' />
+          <img
+            className={!grayStates.man ? style.grayImg : ''}
+            src='src/assets/waldos/purple-man.png'
+            alt='purple-man'
+          />
           <p>Purple Paulie</p>
         </div>
         <div
-          className={!failColor ? style.items : style.itemsFail}
+          className={`{${!failColor ? style.items : style.itemsFail} ${
+            !grayStates.bull ? style.disableItem : style.items
+          }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -163,11 +172,17 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/bull.png' alt='bull' />
+          <img
+            className={!grayStates.bull ? style.grayImg : ''}
+            src='src/assets/waldos/bull.png'
+            alt='bull'
+          />
           <p>Bull Squishy</p>
         </div>
         <div
-          className={!failColor ? style.items : style.itemsFail}
+          className={`{${!failColor ? style.items : style.itemsFail} ${
+            !grayStates.duck ? style.disableItem : style.items
+          }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -178,11 +193,17 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/duck.png' alt='duck' />
+          <img
+            className={!grayStates.duck ? style.grayImg : ''}
+            src='src/assets/waldos/duck.png'
+            alt='duck'
+          />
           <p>Danny Duck</p>
         </div>
         <div
-          className={!failColor ? style.items : style.itemsFail}
+          className={`{${!failColor ? style.items : style.itemsFail} ${
+            !grayStates.gnome ? style.disableItem : style.items
+          }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -193,11 +214,17 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/gnome.png' alt='Edgar' />
+          <img
+            className={!grayStates.gnome ? style.grayImg : ''}
+            src='src/assets/waldos/gnome.png'
+            alt='Edgar'
+          />
           <p>Gnomeo</p>
         </div>
         <div
-          className={!failColor ? style.items : style.itemsFail}
+          className={`{${!failColor ? style.items : style.itemsFail} ${
+            !grayStates.poe ? style.disableItem : style.items
+          }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
@@ -208,7 +235,11 @@ function ChooseImage({
             )
           }
         >
-          <img src='src/assets/waldos/poe.png' alt='gnome' />
+          <img
+            className={!grayStates.poe ? style.grayImg : ''}
+            src='src/assets/waldos/poe.png'
+            alt='gnome'
+          />
           <p>Edgar Allen Poe</p>
         </div>
         <button onClick={handleCancel}>Cancel</button>

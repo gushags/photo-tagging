@@ -23,7 +23,8 @@
 }
 
 .items,
-.itemsFail {
+.itemsFail,
+.disableItem {
   display: flex;
   padding: 7px 10px 0;
 }
@@ -45,6 +46,14 @@
 .itemsFail:hover {
   cursor: pointer;
   background-color: #ff000040;
+}
+
+.disableItem {
+  pointer-events: none;
+}
+
+.disableItem:hover {
+  pointer-events: none;
 }
 
 @keyframes shake {
@@ -95,4 +104,8 @@
 .successBox {
   animation: popOut 0.9s ease-in-out forwards;
   /* 'forwards' ensures it stays at opacity 0 at the end */
+}
+
+.grayImg {
+  filter: grayscale(100%);
 }
