@@ -67,7 +67,7 @@ function ChooseImage({
         ...prevState,
         [id]: !prevState[id],
       };
-
+      // Stop timer if all pictures found
       const hasTrue = Object.values(updated).some((value) => value === true);
       if (!hasTrue) setStopTimer(true);
 
@@ -77,12 +77,15 @@ function ChooseImage({
     // trigger success animation
     setSuccessAnimation(true);
 
-    // delay the actual removal until the animation finishes
-    setTimeout(() => {
-      setClosePopup(true); // optional if you still want to fade opacity
-      setSelection(false); // close popup
-      setSuccessAnimation(false); // reset for next time
-    }, 500); // match this to the CSS transition duration
+    // small delay so user sees the green flash, then start fade
+    timeoutRef.current = setTimeout(() => {
+      // MATCH this duration to the CSS transition length (see .choicesBox transition)
+      timeoutRef.current = setTimeout(() => {
+        // setClosePopup(true);
+        setSelection(false); // close popup
+        setSuccessAnimation(false); // reset for next time
+      }, 900);
+    }, 500);
   };
 
   const startFailCloseSequence = () => {
@@ -102,17 +105,15 @@ function ChooseImage({
       timeoutRef.current = setTimeout(() => {
         clearCircle();
         setFailColor(false);
-        // setFailedId(null);
         setClosePopup(false); // reset in case component reused
         setSelection(false);
-      }, 600); // fade duration in ms (should match CSS)
+      }, 600);
     }, 500); // time to display red before fading
   };
 
   const checkTargetPosition = (circleX, circleY, objX, objY, objID) => {
     if (checkCoordinatesForPic(circleX, circleY, objX, objY, dimension)) {
       console.log('success');
-
       handleSuccess(objID);
     } else {
       // change hover color if false
