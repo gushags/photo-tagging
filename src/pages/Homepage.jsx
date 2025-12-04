@@ -3,6 +3,8 @@
 import GameImage from '../components/GameImage/GameImage';
 import Navigation from '../components/Navigation/Navigation';
 import Leaderboard from '../components/LeaderBoard/LeaderBoard';
+import StartScreen from '../components/StartScreen/StartScreen';
+import style from './Homepage.module.css';
 
 import { useState } from 'react';
 
@@ -17,22 +19,33 @@ function Homepage() {
   });
   const [timer, setTimer] = useState(0);
   const [stopTimer, setStopTimer] = useState(false);
+  const [start, setStart] = useState(true);
+  const [loading, setLoading] = useState(true);
+
   return (
     <>
-      <Navigation
-        grayStates={grayStates}
-        timer={timer}
-        setTimer={setTimer}
-        stopTimer={stopTimer}
-      />
-      <GameImage
-        grayStates={grayStates}
-        setGrayStates={setGrayStates}
-        setTimer={setTimer}
-        stopTimer={stopTimer}
-        setStopTimer={setStopTimer}
-      />
-      {stopTimer && <Leaderboard />}
+      <div className={style.mainWrapper}>
+        <Navigation
+          grayStates={grayStates}
+          start={start}
+          timer={timer}
+          setTimer={setTimer}
+          stopTimer={stopTimer}
+          loading={loading}
+          setLoading={setLoading}
+        />
+        {start && <StartScreen setStart={setStart} />}
+        <GameImage
+          grayStates={grayStates}
+          setGrayStates={setGrayStates}
+          start={start}
+          setStart={setStart}
+          setStopTimer={setStopTimer}
+          loading={loading}
+          setLoading={setLoading}
+        />
+        {stopTimer && <Leaderboard />}
+      </div>
     </>
   );
 }

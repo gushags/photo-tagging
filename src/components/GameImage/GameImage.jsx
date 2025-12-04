@@ -4,7 +4,14 @@ import { useState, useRef, useEffect } from 'react';
 import ChooseImage from '../ChooseImage/ChooseImage';
 import style from './GameImage.module.css';
 
-function GameImage({ grayStates, setGrayStates, setStopTimer }) {
+function GameImage({
+  grayStates,
+  setGrayStates,
+  setStopTimer,
+  loading,
+  setLoading,
+  start,
+}) {
   const [selection, setSelection] = useState(false);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const containerRef = useRef();
@@ -59,9 +66,14 @@ function GameImage({ grayStates, setGrayStates, setStopTimer }) {
     setSelection(true);
   };
 
+  useEffect(() => {
+    setLoading(false);
+  }, [setLoading]);
+
+  if (loading) return <section className={style.loading}>Loading...</section>;
   return (
     <>
-      <section className={style.imageWrapper}>
+      <section className={start ? style.startWrapper : style.imageWrapper}>
         <img
           className={style.imageWrapperImg}
           src='src/assets/library.jpg'

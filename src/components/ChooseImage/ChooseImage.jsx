@@ -139,25 +139,26 @@ function ChooseImage({
       >
         <div
           className={`{${!failColor ? style.items : style.itemsFail} ${
-            !grayStates.man ? style.disableItem : style.items
+            !grayStates.poe ? style.disableItem : style.items
           }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
               coordinates.y,
-              manObject.x,
-              manObject.y,
-              manObject.id
+              poeObj.x,
+              poeObj.y,
+              poeObj.id
             )
           }
         >
           <img
-            className={!grayStates.man ? style.grayImg : ''}
-            src='src/assets/waldos/purple-man.png'
-            alt='purple-man'
+            className={!grayStates.poe ? style.grayImg : ''}
+            src='src/assets/waldos/poe.png'
+            alt='gnome'
           />
-          <p>Purple Paulie</p>
+          <p>Edgar Allen Poe</p>
         </div>
+
         <div
           className={`{${!failColor ? style.items : style.itemsFail} ${
             !grayStates.bull ? style.disableItem : style.items
@@ -217,30 +218,30 @@ function ChooseImage({
           <img
             className={!grayStates.gnome ? style.grayImg : ''}
             src='src/assets/waldos/gnome.png'
-            alt='Edgar'
+            alt='Gnomeo'
           />
           <p>Gnomeo</p>
         </div>
         <div
           className={`{${!failColor ? style.items : style.itemsFail} ${
-            !grayStates.poe ? style.disableItem : style.items
+            !grayStates.man ? style.disableItem : style.items
           }`}
           onClick={() =>
             checkTargetPosition(
               coordinates.x,
               coordinates.y,
-              poeObj.x,
-              poeObj.y,
-              poeObj.id
+              manObject.x,
+              manObject.y,
+              manObject.id
             )
           }
         >
           <img
-            className={!grayStates.poe ? style.grayImg : ''}
-            src='src/assets/waldos/poe.png'
-            alt='gnome'
+            className={!grayStates.man ? style.grayImg : ''}
+            src='src/assets/waldos/purple-man.png'
+            alt='purple-man'
           />
-          <p>Edgar Allen Poe</p>
+          <p>Purple Paulie</p>
         </div>
         <button onClick={handleCancel}>Cancel</button>
       </div>
