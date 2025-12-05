@@ -49,11 +49,12 @@
 }
 
 /* Winner centered and ABOVE normal content */
-.winner {
+/* .winner {
   position: absolute;
   top: 27%;
   left: 27%;
-  animation: winner 3s ease-in-out forwards;
+  animation: winner 3s ease-out forwards;
+  animation-delay: 0.7s;
 }
 
 @keyframes winner {
@@ -62,6 +63,7 @@
     opacity: 0;
   }
   20% {
+    transform: scale(1);
     opacity: 0.6;
   }
   40% {
@@ -76,13 +78,51 @@
     transform: scale(1);
     opacity: 0;
   }
+} */
+
+.winner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  animation: winner 3.5s ease forwards;
+  animation-delay: 0.7s;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+@keyframes winner {
+  0% {
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  10% {
+    transform: translate(-50%, -50%);
+    opacity: 0.4;
+  }
+  20% {
+    transform: translate(-50%, -50%);
+    opacity: 0.8;
+  }
+  30% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
 }
 
 /* Leaderboard hidden and not taking space initially */
 .leaderboard {
+  width: 90%;
   opacity: 0;
   pointer-events: none;
   animation: leaderboardFade 5s forwards;
+  animation-delay: 0.9s;
 }
 
 @keyframes leaderboardFade {
@@ -100,4 +140,26 @@
 
 li {
   font-size: 1.35rem;
+  width: 90%;
+}
+
+.scores {
+  padding-left: 5px;
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+}
+
+.name {
+  padding-right: 5px;
+}
+
+.dots {
+  flex-grow: 1;
+  border-bottom: 3px dotted white; /* creates the dot leader effect */
+  margin: 0 5px; /* spacing around the dots */
+}
+
+.score {
+  padding-left: 5px;
 }

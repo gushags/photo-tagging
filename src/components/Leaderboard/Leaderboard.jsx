@@ -12,6 +12,18 @@ function Leaderboard({
 }) {
   const [visible, setVisible] = useState(false);
 
+  const scores = [
+    { name: 'Trent', score: '00:55' },
+    { name: 'Amber', score: '01:05' },
+    { name: 'Jeff', score: '01:07' },
+    { name: 'Jeff', score: '01:08' },
+    { name: 'Jeff', score: '01:09' },
+    { name: 'Jeff', score: '01:17' },
+    { name: 'Amber', score: '02:07' },
+    { name: 'Sam', score: '02:17' },
+    { name: 'Elliot', score: '02:25' },
+  ];
+
   const handleNewPlay = () => {
     console.log('New Game');
     setVisible(false);
@@ -46,16 +58,16 @@ function Leaderboard({
           <div className={style.leaderboard}>
             <h2>Top Scores</h2>
             <ol>
-              <li>Trent ...... 00:45</li>
-              <li>Bill ...... 00:55</li>
-              <li>Amber ...... 01:05</li>
-              <li>Jeff ...... 01:07</li>
-              <li>Jeff ...... 01:07</li>
-              <li>Jeff ...... 01:09</li>
-              <li>Jeff ...... 01:17</li>
-              <li>Amber ...... 02:07</li>
-              <li>Sam ...... 02:17</li>
-              <li>Elliot ...... 02:25</li>
+              {scores &&
+                scores.map((p) => (
+                  <li>
+                    <div className={style.scores}>
+                      <span className={style.name}>{p.name}</span>
+                      <span className={style.dots}></span>
+                      <span className={style.score}>{p.score}</span>
+                    </div>
+                  </li>
+                ))}
             </ol>
             <button onClick={handleNewPlay}>Play Again</button>
           </div>
