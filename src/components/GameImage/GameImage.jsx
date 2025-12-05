@@ -5,6 +5,8 @@ import ChooseImage from '../ChooseImage/ChooseImage';
 import style from './GameImage.module.css';
 
 function GameImage({
+  targetCircles,
+  setTargetCircles,
   grayStates,
   setGrayStates,
   setStopTimer,
@@ -17,7 +19,6 @@ function GameImage({
   const containerRef = useRef();
   const [dimension, setDimension] = useState();
   const [currentCircle, setCurrentCircle] = useState();
-  const [targetCircles, setTargetCircles] = useState([]);
 
   useEffect(() => {
     function updateSize() {

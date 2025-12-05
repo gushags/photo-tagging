@@ -21,6 +21,7 @@ function Homepage() {
   const [stopTimer, setStopTimer] = useState(false);
   const [start, setStart] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [targetCircles, setTargetCircles] = useState([]);
 
   return (
     <>
@@ -36,6 +37,8 @@ function Homepage() {
         />
         {start && <StartScreen setStart={setStart} />}
         <GameImage
+          targetCircles={targetCircles}
+          setTargetCircles={setTargetCircles}
           grayStates={grayStates}
           setGrayStates={setGrayStates}
           start={start}
@@ -44,7 +47,15 @@ function Homepage() {
           loading={loading}
           setLoading={setLoading}
         />
-        {stopTimer && <Leaderboard />}
+        {stopTimer && (
+          <Leaderboard
+            setTimer={setTimer}
+            setStopTimer={setStopTimer}
+            setStart={setStart}
+            setGrayStates={setGrayStates}
+            setTargetCircles={setTargetCircles}
+          />
+        )}
       </div>
     </>
   );
