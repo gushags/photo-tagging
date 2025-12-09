@@ -24,8 +24,12 @@ function StartScreen({ setStart }) {
       <div className={`${style.overlay} ${visible ? style.show : ''}`}>
         <div className={style.articleContainer}>
           <h2>How to Play</h2>
-          <p>Phasellus laoreet lorem vel dolor tempus vehicula.</p>
-          <button onClick={handleStart}>Start</button>
+          <p>Edgar and his friends are hidden in the library.</p>
+          <p>When you find them, click on the image to select it.</p>
+          <p>Quickest wins!</p>
+          <button className={style.start} onClick={handleStart}>
+            Start
+          </button>
         </div>
       </div>
     </>

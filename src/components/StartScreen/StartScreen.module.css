@@ -1,5 +1,8 @@
 /* StartScreen.module.css */
 
+p {
+  line-height: 1;
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -40,4 +43,8 @@
 
 .overlay.show .articleContainer {
   transform: translateY(0);
+}
+
+.start {
+  margin-top: 10px;
 }

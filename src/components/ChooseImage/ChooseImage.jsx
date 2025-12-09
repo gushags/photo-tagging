@@ -243,7 +243,9 @@ function ChooseImage({
           />
           <p>Purple Paulie</p>
         </div>
-        <button onClick={handleCancel}>Cancel</button>
+        <button className={style.cancel} onClick={handleCancel}>
+          Cancel
+        </button>
       </div>
     </>
   );
