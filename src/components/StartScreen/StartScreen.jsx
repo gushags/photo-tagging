@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import style from './StartScreen.module.css';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function StartScreen({ setStart }) {
   const [visible, setVisible] = useState(false);
@@ -12,11 +13,28 @@ function StartScreen({ setStart }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleStart = () => {
+  const handleStart = async () => {
     // Trigger fade-out
     setVisible(false);
+    // Create new player
+    try {
+      const response = await fetch(API_URL + `/players`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const result = await response.json();
+      console.log(result); // See if it sends my json
+      if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
+    } catch (error) {
+      console.log(error);
+    }
+
     // Wait for animation to finish before unmounting
-    setTimeout(() => setStart(false), 500);
+    setTimeout(() => {
+      setStart(false);
+    }, 500);
   };
 
   return (
