@@ -5,10 +5,12 @@ import ChooseImage from '../ChooseImage/ChooseImage';
 import style from './GameImage.module.css';
 
 function GameImage({
+  playerId,
   targetCircles,
   setTargetCircles,
   grayStates,
   setGrayStates,
+  stopTimer,
   setStopTimer,
   loading,
   setLoading,
@@ -107,6 +109,7 @@ function GameImage({
           ))}
           {selection && (
             <ChooseImage
+              playerId={playerId}
               currentCircle={currentCircle}
               dimension={dimension}
               setSelection={setSelection}
@@ -115,6 +118,7 @@ function GameImage({
               setTargetCircles={setTargetCircles}
               grayStates={grayStates}
               setGrayStates={setGrayStates}
+              stopTimer={stopTimer}
               setStopTimer={setStopTimer}
             />
           )}

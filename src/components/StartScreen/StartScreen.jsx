@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import style from './StartScreen.module.css';
 const API_URL = import.meta.env.VITE_API_URL;
 
-function StartScreen({ setStart }) {
+function StartScreen({ setStart, setPlayerId }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -26,6 +26,8 @@ function StartScreen({ setStart }) {
       });
       const result = await response.json();
       console.log(result); // See if it sends my json
+      setPlayerId(result.data.id); // playerId lets us update time on victory
+
       if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
     } catch (error) {
       console.log(error);
@@ -43,7 +45,7 @@ function StartScreen({ setStart }) {
         <div className={style.articleContainer}>
           <h2>How to Play</h2>
           <p>Edgar and his friends are hidden in the library.</p>
-          <p>When you find them, click on the image to select it.</p>
+          <p>When you find one, click on their image to select it.</p>
           <p>Quickest wins!</p>
           <button className={style.start} onClick={handleStart}>
             Start

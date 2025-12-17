@@ -10,8 +10,10 @@ import {
   poeObj,
 } from '../../../api/data';
 import { getPopupPosition, checkCoordinatesForPic } from '../../utils/util';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function ChooseImage({
+  playerId,
   dimension,
   currentCircle,
   setSelection,
@@ -20,6 +22,7 @@ function ChooseImage({
   targetCircles,
   setGrayStates,
   grayStates,
+  stopTimer,
   setStopTimer,
 }) {
   const [failColor, setFailColor] = useState(false);
@@ -61,7 +64,7 @@ function ChooseImage({
     setTargetCircles(updatedCircles);
   };
 
-  const handleSuccess = (id) => {
+  const handleSuccess = async (id) => {
     // update grayscale state
     setGrayStates((prevState) => {
       const updated = {
@@ -78,6 +81,8 @@ function ChooseImage({
     // trigger success animation
     setSuccessAnimation(true);
 
+    // if player wins, get the total time from db, not frontend timer
+
     // small delay so user sees the green flash, then start fade
     timeoutRef.current = setTimeout(() => {
       // MATCH this duration to the CSS transition length (see .choicesBox transition)
@@ -88,6 +93,28 @@ function ChooseImage({
       }, 900);
     }, 500);
   };
+
+  useEffect(() => {
+    async function updatePlayer() {
+      if (stopTimer) {
+        try {
+          const response = await fetch(API_URL + `/players/${playerId}/stop`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const result = await response.json();
+          console.log(result); // See if it sends my json
+
+          if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    updatePlayer();
+  }, [stopTimer, playerId]);
 
   const startFailCloseSequence = () => {
     setFailColor(true);

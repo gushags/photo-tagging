@@ -17,6 +17,7 @@ function Homepage() {
     poe: true,
     man: true,
   });
+  const [playerId, setPlayerId] = useState(null);
   const [timer, setTimer] = useState(0);
   const [stopTimer, setStopTimer] = useState(false);
   const [start, setStart] = useState(true);
@@ -35,20 +36,31 @@ function Homepage() {
           loading={loading}
           setLoading={setLoading}
         />
-        {start && <StartScreen setStart={setStart} />}
+        {start && (
+          <StartScreen
+            setStart={setStart}
+            playerId={playerId}
+            setPlayerId={setPlayerId}
+          />
+        )}
         <GameImage
+          playerId={playerId}
           targetCircles={targetCircles}
           setTargetCircles={setTargetCircles}
           grayStates={grayStates}
           setGrayStates={setGrayStates}
           start={start}
           setStart={setStart}
+          stopTimer={stopTimer}
           setStopTimer={setStopTimer}
           loading={loading}
           setLoading={setLoading}
         />
         {stopTimer && (
           <Leaderboard
+            playerId={playerId}
+            setPlayerId={setPlayerId}
+            stopTimer={stopTimer}
             setTimer={setTimer}
             setStopTimer={setStopTimer}
             setStart={setStart}
