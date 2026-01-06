@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import style from './Leaderboard.module.css';
 const API_URL = import.meta.env.VITE_API_URL;
+import { formatTime } from '../../utils/util';
 
 function Leaderboard({
   setPlayerId,
@@ -14,18 +15,7 @@ function Leaderboard({
   setTargetCircles,
 }) {
   const [visible, setVisible] = useState(false);
-
-  const scores = [
-    { name: 'Trent', score: '00:55' },
-    { name: 'Amber', score: '01:05' },
-    { name: 'Jeff', score: '01:07' },
-    { name: 'Jeff', score: '01:08' },
-    { name: 'Jeff', score: '01:09' },
-    { name: 'Anonymous', score: '01:17' },
-    { name: 'Amber', score: '02:07' },
-    { name: 'Sam', score: '02:17' },
-    { name: 'Elliot', score: '02:25' },
-  ];
+  const [scores, setScores] = useState([]);
 
   useEffect(() => {
     if (stopTimer) {
@@ -38,7 +28,7 @@ function Leaderboard({
             },
           });
           const result = await response.json();
-          console.log(result);
+          setScores(result.data);
           if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
         } catch (error) {
           console.log(error);
@@ -53,11 +43,11 @@ function Leaderboard({
     setVisible(false);
     setStart(false);
     setGrayStates({
-      bull: true,
-      duck: true,
-      gnome: true,
-      poe: true,
-      man: true,
+      bull: false,
+      duck: false,
+      gnome: false,
+      poe: false,
+      man: false,
     });
     setTargetCircles([]);
     setTimer(0);
@@ -100,10 +90,10 @@ function Leaderboard({
               {scores &&
                 scores.map((p) => (
                   <li>
-                    <div className={style.scores}>
+                    <div key={p.id} className={style.scores}>
                       <span className={style.name}>{p.name}</span>
                       <span className={style.dots}></span>
-                      <span className={style.score}>{p.score}</span>
+                      <span className={style.score}>{formatTime(p.time)}</span>
                     </div>
                   </li>
                 ))}

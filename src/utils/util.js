@@ -13,7 +13,6 @@ export function getPopupPosition(
 
   const xPos = circleX * containerRect.width;
   const yPos = circleY * containerRect.height;
-  console.log('xPos:', xPos, 'yPos:', yPos);
   let left = xPos + offset.x;
   let top = yPos + offset.y;
 

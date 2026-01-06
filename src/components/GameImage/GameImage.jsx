@@ -19,7 +19,7 @@ function GameImage({
   const [selection, setSelection] = useState(false);
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
   const containerRef = useRef();
-  const [dimension, setDimension] = useState();
+  const [dimension, setDimension] = useState({ width: 1, height: 1 });
   const [currentCircle, setCurrentCircle] = useState();
 
   useEffect(() => {
@@ -64,7 +64,6 @@ function GameImage({
 
   const showChoicesBox = (newCircle) => {
     if (selection) return; // ignore clicks on background if already selected
-    console.log(newCircle);
     setCoordinates({ x: newCircle.x, y: newCircle.y });
     setSelection(true);
   };

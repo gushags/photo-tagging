@@ -35,34 +35,32 @@ function Navigation({
           <div>
             <img
               id='poe'
-              className={!grayStates.poe ? style.grayscale : style.noGrayscale}
+              className={grayStates.poe ? style.grayscale : style.noGrayscale}
               src='src/assets/waldos/poe.png'
               alt='Edgar Allen Poe'
             />
             <img
               id='bull'
-              className={!grayStates.bull ? style.grayscale : style.noGrayscale}
+              className={grayStates.bull ? style.grayscale : style.noGrayscale}
               src='src/assets/waldos/bull.png'
               alt='Bull Squishy'
             />
             <img
               id='duck'
-              className={!grayStates.duck ? style.grayscale : style.noGrayscale}
+              className={grayStates.duck ? style.grayscale : style.noGrayscale}
               src='src/assets/waldos/duck.png'
               alt='Danny Duck'
             />
             <img
               id='gnome'
-              className={
-                !grayStates.gnome ? style.grayscale : style.noGrayscale
-              }
+              className={grayStates.gnome ? style.grayscale : style.noGrayscale}
               src='src/assets/waldos/gnome.png'
               alt='Gnomeo'
             />
 
             <img
               id='man'
-              className={!grayStates.man ? style.grayscale : style.noGrayscale}
+              className={grayStates.man ? style.grayscale : style.noGrayscale}
               src='src/assets/waldos/purple-man.png'
               alt='Purple Man'
             />

@@ -5,24 +5,26 @@ import Navigation from '../components/Navigation/Navigation';
 import Leaderboard from '../components/LeaderBoard/LeaderBoard';
 import StartScreen from '../components/StartScreen/StartScreen';
 import style from './Homepage.module.css';
+const API_URL = import.meta.env.VITE_API_URL;
 
 import { useState } from 'react';
 
 function Homepage() {
-  // allow grayed out versions of icons
-  const [grayStates, setGrayStates] = useState({
-    bull: true,
-    duck: true,
-    gnome: true,
-    poe: true,
-    man: true,
-  });
   const [playerId, setPlayerId] = useState(null);
   const [timer, setTimer] = useState(0);
   const [stopTimer, setStopTimer] = useState(false);
   const [start, setStart] = useState(true);
   const [loading, setLoading] = useState(true);
   const [targetCircles, setTargetCircles] = useState([]);
+
+  // allow grayed out versions of icons
+  const [grayStates, setGrayStates] = useState({
+    bull: false,
+    duck: false,
+    gnome: false,
+    poe: false,
+    man: false,
+  });
 
   return (
     <>
