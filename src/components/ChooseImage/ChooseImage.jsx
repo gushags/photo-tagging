@@ -11,9 +11,8 @@ function ChooseImage({
   dimension,
   currentCircle,
   setSelection,
-  coordinates, // { x, y } — already normalized
+  coordinates,
   setTargetCircles,
-  // targetCircles,
   setGrayStates,
   grayStates,
   stopTimer,
