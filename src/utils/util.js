@@ -37,17 +37,6 @@ export function getPopupPosition(
   return { left, top };
 }
 
-export function checkCoordinatesForPic(cx, cy, objX, objY, dimension, r = 25) {
-  const distanceSquared =
-    (cx * dimension.width - objX * dimension.width) ** 2 +
-    (cy * dimension.height - objY * dimension.height) ** 2;
-  if (distanceSquared <= r * r) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 export const formatTime = (totalSeconds) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;

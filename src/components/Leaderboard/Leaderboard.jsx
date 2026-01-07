@@ -5,8 +5,6 @@ import style from './Leaderboard.module.css';
 const API_URL = import.meta.env.VITE_API_URL;
 import { formatTime } from '../../utils/util';
 
-// TODO: Add ability to change Anonymous to player's name
-
 function Leaderboard({
   setPlayerId,
   playerId,
@@ -71,7 +69,6 @@ function Leaderboard({
       });
       const result = await response.json();
       setPlayerId(result.data.id);
-      console.log(result); // See if it sends my json
       if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
     } catch (error) {
       console.log(error);

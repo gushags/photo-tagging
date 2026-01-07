@@ -38,7 +38,6 @@ function GameImage({
   const registerPosition = (event) => {
     const e = event.currentTarget;
     const dim = e.getBoundingClientRect();
-    console.log('Dimension: ', dim);
     setDimension(dim);
     const xPercent = (event.clientX - dim.left) / dim.width;
     const yPercent = (event.clientY - dim.top) / dim.height;

@@ -116,7 +116,6 @@ function ChooseImage({
           method: 'POST',
         });
         const result = await response.json();
-        console.log('time: ', result.data.time);
         setTimer(result.data.time); // Make visual timer match backend timer
       } catch (err) {
         console.error(err);

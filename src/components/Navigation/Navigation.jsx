@@ -1,25 +1,9 @@
 // Navigation.jsx
 
 import style from './Navigation.module.css';
-// import { useEffect, useRef } from 'react';
 import { formatTime } from '../../utils/util';
 
 function Navigation({ grayStates, timer, loading, start }) {
-  // const hasMounted = useRef(false);
-
-  // useEffect(() => {
-  //   // Skip first render
-  //   if (!hasMounted.current) {
-  //     hasMounted.current = true;
-  //     return;
-  //   }
-  //   if (!stopTimer && !start) {
-  //     setTimeout(() => {
-  //       setTimer((timer) => timer + 1);
-  //     }, 1000);
-  //   }
-  // }, [timer, setTimer, stopTimer, start]);
-
   return (
     <>
       <nav className={style.navigation}>
