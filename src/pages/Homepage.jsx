@@ -7,10 +7,11 @@ import StartScreen from '../components/StartScreen/StartScreen';
 import style from './Homepage.module.css';
 const API_URL = import.meta.env.VITE_API_URL;
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Homepage() {
   const [playerId, setPlayerId] = useState(null);
+  const [gameStartTime, setGameStartTime] = useState(null);
   const [timer, setTimer] = useState(0);
   const [stopTimer, setStopTimer] = useState(false);
   const [start, setStart] = useState(true);
@@ -25,6 +26,17 @@ function Homepage() {
     poe: false,
     man: false,
   });
+
+  useEffect(() => {
+    if (loading || start || stopTimer || !gameStartTime) return;
+
+    const interval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+      setTimer(elapsed);
+    }, 250); // smooth + accurate
+
+    return () => clearInterval(interval);
+  }, [loading, start, stopTimer, gameStartTime]);
 
   return (
     <>
@@ -43,6 +55,7 @@ function Homepage() {
             setStart={setStart}
             playerId={playerId}
             setPlayerId={setPlayerId}
+            setGameStartTime={setGameStartTime}
           />
         )}
         <GameImage
@@ -53,6 +66,7 @@ function Homepage() {
           setGrayStates={setGrayStates}
           start={start}
           setStart={setStart}
+          setTimer={setTimer}
           stopTimer={stopTimer}
           setStopTimer={setStopTimer}
           loading={loading}
@@ -68,6 +82,7 @@ function Homepage() {
             setStart={setStart}
             setGrayStates={setGrayStates}
             setTargetCircles={setTargetCircles}
+            setGameStartTime={setGameStartTime}
           />
         )}
       </div>

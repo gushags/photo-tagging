@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import style from './StartScreen.module.css';
 const API_URL = import.meta.env.VITE_API_URL;
 
-function StartScreen({ setStart, setPlayerId }) {
+function StartScreen({ setStart, setPlayerId, setGameStartTime }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function StartScreen({ setStart, setPlayerId }) {
 
     // Wait for animation to finish before unmounting
     setTimeout(() => {
+      setGameStartTime(Date.now());
       setStart(false);
     }, 500);
   };

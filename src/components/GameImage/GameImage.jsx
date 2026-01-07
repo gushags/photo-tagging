@@ -10,6 +10,7 @@ function GameImage({
   setTargetCircles,
   grayStates,
   setGrayStates,
+  setTimer,
   stopTimer,
   setStopTimer,
   loading,
@@ -117,6 +118,7 @@ function GameImage({
               setTargetCircles={setTargetCircles}
               grayStates={grayStates}
               setGrayStates={setGrayStates}
+              setTimer={setTimer}
               stopTimer={stopTimer}
               setStopTimer={setStopTimer}
             />

@@ -15,6 +15,7 @@ function ChooseImage({
   setTargetCircles,
   setGrayStates,
   grayStates,
+  setTimer,
   stopTimer,
   setStopTimer,
 }) {
@@ -111,16 +112,19 @@ function ChooseImage({
 
     async function updatePlayer() {
       try {
-        await fetch(`${API_URL}/players/${playerId}/stop`, {
+        const response = await fetch(`${API_URL}/players/${playerId}/stop`, {
           method: 'POST',
         });
+        const result = await response.json();
+        console.log('time: ', result.data.time);
+        setTimer(result.data.time); // Make visual timer match backend timer
       } catch (err) {
         console.error(err);
       }
     }
 
     updatePlayer();
-  }, [stopTimer, playerId]);
+  }, [stopTimer, playerId, setTimer]);
 
   return (
     <div
