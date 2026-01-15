@@ -49,8 +49,6 @@ function GameImage({
     if (selection) return;
     let [x, y] = registerPosition(event);
 
-    console.log({ x: x, y: y });
-
     // make new svg circle element
     const newCircle = {
       id: targetCircles.length + 1,

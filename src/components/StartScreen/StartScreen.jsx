@@ -25,7 +25,6 @@ function StartScreen({ setStart, setPlayerId, setGameStartTime }) {
         },
       });
       const result = await response.json();
-      console.log(result); // See if it sends my json
       setPlayerId(result.data.id); // playerId lets us update time on victory
 
       if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
