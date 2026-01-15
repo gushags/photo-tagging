@@ -69,6 +69,7 @@ function Leaderboard({
       });
       const result = await response.json();
       setPlayerId(result.data.id);
+
       if (!response.ok) throw new Error(`HTTP error! ${response.status}`);
     } catch (error) {
       console.log(error);

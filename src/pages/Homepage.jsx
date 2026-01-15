@@ -2,7 +2,7 @@
 
 import GameImage from '../components/GameImage/GameImage';
 import Navigation from '../components/Navigation/Navigation';
-import Leaderboard from '../components/LeaderBoard/LeaderBoard';
+import Leaderboard from '../components/Leaderboard/Leaderboard';
 import StartScreen from '../components/StartScreen/StartScreen';
 import style from './Homepage.module.css';
 const API_URL = import.meta.env.VITE_API_URL;
