@@ -138,35 +138,35 @@ function ChooseImage({
     >
       <Choice
         label='Edgar Allan Poe'
-        img='src/assets/waldos/poe.png'
+        img='assets/waldos/poe.png'
         disabled={grayStates.poe}
         onClick={() => submitGuess('poe')}
       />
 
       <Choice
         label='Bull Squishy'
-        img='src/assets/waldos/bull.png'
+        img='assets/waldos/bull.png'
         disabled={grayStates.bull}
         onClick={() => submitGuess('bull')}
       />
 
       <Choice
         label='Danny Duck'
-        img='src/assets/waldos/duck.png'
+        img='assets/waldos/duck.png'
         disabled={grayStates.duck}
         onClick={() => submitGuess('duck')}
       />
 
       <Choice
         label='Gnomeo'
-        img='src/assets/waldos/gnome.png'
+        img='assets/waldos/gnome.png'
         disabled={grayStates.gnome}
         onClick={() => submitGuess('gnome')}
       />
 
       <Choice
         label='Purple Paulie'
-        img='src/assets/waldos/purple-man.png'
+        img='assets/waldos/purple-man.png'
         disabled={grayStates.man}
         onClick={() => submitGuess('man')}
       />

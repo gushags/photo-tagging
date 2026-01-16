@@ -76,7 +76,7 @@ function GameImage({
       <section className={start ? style.startWrapper : style.imageWrapper}>
         <img
           className={style.imageWrapperImg}
-          src='src/assets/library.jpg'
+          src='assets/library.jpg'
           alt=''
         />
 
